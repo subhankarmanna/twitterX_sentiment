@@ -1,111 +1,183 @@
-# Twitter/X Sentiment Analysis  
-<div align="center">  
-  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter Blue Logo" width="100" height="100">  
-  <h3>⚡ High-Performance Sentiment Extraction Engine ⚡</h3>  
-  <p><i>Streamlined · Reproducible · Dependency-Free</i></p>  
-</div>  
+
+# ⚡ Twitter/X Sentiment Analysis
+
+<div align="center">
+  <img src="https://upload.wikimedia.org/wikipedia/commons/6/6f/Logo_of_Twitter.svg" alt="Twitter Blue Logo" width="100" height="100">
+  <h3>High-Performance Sentiment Extraction Engine</h3>
+  <p><i>Streamlined · Reproducible · Full-Stack · Dependency-Free</i></p>
+</div>
 
 ---
 
-## 🚀 Introduction  
-**Twitter/X Sentiment Analysis** is a modular framework designed to deliver **fast and reliable sentiment insights** from tweet datasets.  
-Built for **clarity and performance**, this project eliminates heavy Kaggle dependencies in favor of a **pure, streamlined Python architecture**.  
+## 🚀 Introduction
 
-Whether for **academic research**, **competitive analysis**, or **industrial showcasing**, this tool converts raw text into **actionable data signals**.  
+**Twitter/X Sentiment Analysis** is a full-stack framework designed to deliver **fast and reliable sentiment insights** from tweet datasets. It combines a **React frontend**, **Node.js backend**, and a **Python-based ML engine** to provide real-time sentiment classification.
 
----
-
-## ✨ Key Features  
-- 🎯 **Tri-Class Classification** → Predicts **Positive**, **Negative**, and **Neutral** sentiments.  
-- ⚙️ **Modular Architecture** → Extensible codebase for easy scaling and customization.  
-- 🛡️ **Privacy-First Design** → Works with custom CSV datasets (tweet text only).  
-- 🔓 **Open Source Ecosystem** → Licensed under **GNU GPL v3.0**.  
+Whether you're conducting **academic research**, **competitive brand monitoring**, or building a **data-driven product**, this tool converts raw tweet text into **actionable sentiment signals**.
 
 ---
 
-## 📂 System Architecture  
+## ✨ Key Features
+
+- 🎯 **Tri-Class Sentiment Detection** → Predicts **Positive**, **Negative**, and **Neutral** sentiments.
+- 🧠 **Python ML Engine** → Lightweight, fast, and dependency-free.
+- 🌐 **Full-Stack Integration** → React UI + Express API + Python backend.
+- 🔒 **Privacy-First Design** → Works with custom CSV datasets (no Twitter API required).
+- 🔓 **Open Source** → Licensed under **GNU GPL v3.0**.
+
+---
+
+## 📂 Project Structure
+
 ```plaintext
-python/
-├── Data/
-│   ├── cleaned_sentiment_data.csv        # Preprocessed dataset
-│   └── training.1600000.processed.csv    # High-volume corpus (No Emoticons)
+brand_monitoring/
+├── frontend/                            # React-based UI
+│   ├── src/
+│   │   └── components/                  # Input form, sentiment display
+│   ├── public/
+│   └── package.json                     # Frontend dependencies
 │
-├── models/
-│   └── v1/                               # Serialized ML models (.pkl)
+├── backend/                             # Node.js + Express server
+│   ├── index.js                         # API entry point
+│   └── routes/
+│       └── sentimentRoute.js            # Receives input, invokes Python script
 │
-├── analyzer.py                           # Inference engine (Real-time prediction)
-├── Data_set_Scrap.py                     # ETL: Scraping & Cleaning utilities
-├── date_vectorize.py                     # NLP: TF-IDF Vectorization pipelines
-├── pkl_viewer.py                         # Diagnostics: Model evaluation & inspection
-└── Train_Model.py                        # Training loop & Model persistence
+├── python/                              # Sentiment Analysis Engine
+│   ├── Data/
+│   │   └── training.1600000.processed.csv
+│   ├── models/
+│   │   └── v1/                          # Serialized ML models (.pkl)
+│   ├── analyzer.py                      # Real-time prediction logic
+│   ├── Data_set_Scrap.py                # ETL: Scraping & Cleaning
+│   ├── date_vectorize.py                # TF-IDF Vectorization
+│   ├── pkl_viewer.py                    # Model diagnostics
+│   └── Train_Model.py                   # Training & persistence
+└── .vscode/                             # IDE configuration
 ```
 
 ---
 
-## 🛠️ Tech Stack  
-| Component        | Technology     | Description |
-|------------------|---------------|-------------|
-| **Core**         | Python 3.x     | Runtime environment |
-| **Data**         | pandas         | High-performance data structures |
-| **ML**           | scikit-learn   | Algorithms for classification & regression |
-| **NLP**          | TfidfVectorizer| Text vectorization |
-| **Persistence**  | joblib         | Efficient model serialization |
+## 🔄 Data Flow
+
+1. **Frontend (React)**  
+   - User enters tweet text via input form  
+   - Form triggers API call to backend
+
+2. **Backend (Node.js + Express)**  
+   - Receives input via REST endpoint  
+   - Spawns Python process (`analyzer.py`) using `child_process` or `python-shell`  
+   - Sends input to Python script and receives sentiment output
+
+3. **Python Engine**  
+   - `analyzer.py` loads trained model  
+   - Vectorizes input and predicts sentiment  
+   - Returns result to backend
+
+4. **Frontend**  
+   - Displays sentiment label (Positive / Negative / Neutral) to user
 
 ---
 
-## ⚡ Getting Started  
+## 🛠️ Tech Stack
 
-### 1️⃣ Install Dependencies  
+| Layer           | Technology       | Purpose                              |
+|----------------|------------------|--------------------------------------|
+| **Frontend**    | React            | UI for input and result display      |
+| **Backend**     | Node.js + Express| API routing and Python bridge        |
+| **ML Engine**   | Python 3.x       | Sentiment analysis and prediction    |
+| **Data**        | pandas           | Data manipulation                    |
+| **ML**          | scikit-learn     | Classification algorithms            |
+| **NLP**         | TfidfVectorizer  | Text vectorization                   |
+| **Persistence** | joblib           | Model serialization                  |
+
+---
+
+## ⚙️ Setup Instructions
+
+### 1️⃣ Install Python Dependencies
+
 ```bash
 pip install pandas scikit-learn joblib
 ```
 
-### 2️⃣ Workflow Pipeline  
-**Step 1: Data Ingestion**  
+### 2️⃣ Install Node.js Dependencies
+
 ```bash
-python Data_set_Scrap.py
+cd backend
+npm install
 ```
 
-**Step 2: Feature Extraction**  
-```bash
-python date_vectorize.py
-```
+### 3️⃣ Install React Frontend Dependencies
 
-**Step 3: Model Training**  
 ```bash
-python Train_Model.py
-```
-
-**Step 4: Inference & Diagnostics**  
-```bash
-# Real-time sentiment labeling
-python analyzer.py  
-
-# Model inspection
-python pkl_viewer.py
+cd frontend
+npm install
 ```
 
 ---
 
-## 📜 License & Data Policy  
-- Licensed under **GNU GPL v3.0** → Free to use, modify, and distribute.  
-- Uses **pre-cleaned datasets** → No raw Twitter API data, compliant with X/Twitter’s developer policy.  
-- Logo image licensed under **Creative Commons Attribution-Share Alike 4.0 International**.  
+## 🚦 Workflow Pipeline
+
+### 🧪 Model Training (Python)
+
+```bash
+python Data_set_Scrap.py       # Scrape & clean data
+python date_vectorize.py       # TF-IDF vectorization
+python Train_Model.py          # Train and save model
+```
+
+### 🔍 Inference & Diagnostics
+
+```bash
+python analyzer.py             # Real-time sentiment prediction
+python pkl_viewer.py           # Model inspection
+```
+
+### 🌐 Full-Stack Execution
+
+1. Start backend server:
+
+```bash
+cd backend
+node index.js
+```
+
+2. Start frontend:
+
+```bash
+cd frontend
+npm start
+```
 
 ---
 
-## 🤝 Contributing  
-Open-source spirit drives innovation! Contributions are welcome:  
+## 📜 License & Data Policy
 
-1. Fork the Project  
-2. Create your Feature Branch → `git checkout -b feature/AmazingFeature`  
-3. Commit Changes → `git commit -m 'Add some AmazingFeature'`  
-4. Push to Branch → `git push origin feature/AmazingFeature`  
-5. Open a Pull Request  
+- Licensed under **GNU GPL v3.0** → Free to use, modify, and distribute.
+- Uses **pre-cleaned datasets** → No raw Twitter API data, compliant with X/Twitter’s developer policy.
+- Logo image licensed under **Creative Commons Attribution-Share Alike 4.0 International**.
 
 ---
 
-## 📬 Contact  
-For **enterprise inquiries**, **research collaboration**, or **support**:  
+## 🤝 Contributing
+
+We welcome contributions from developers, researchers, and enthusiasts!
+
+1. Fork the repository  
+2. Create your feature branch → `git checkout -b feature/AmazingFeature`  
+3. Commit your changes → `git commit -m 'Add AmazingFeature'`  
+4. Push to the branch → `git push origin feature/AmazingFeature`  
+5. Open a Pull Request
+
+---
+
+## 📬 Contact
+
+For **enterprise inquiries**, **research collaboration**, or **technical support**:
+
 - Open a GitHub Issue  
-- Contact the maintainer directly  
+- Contact the maintainer directly via email or LinkedIn  
+
+---
+
+Let me know if you'd like me to help write the backend API code or React component next!
