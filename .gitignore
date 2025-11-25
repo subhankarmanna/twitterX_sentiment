@@ -4,6 +4,7 @@ node_modules/
 # Build output
 dist/
 build/
+python/Data
 
 # Logs
 npm-debug.log*
